@@ -6,7 +6,7 @@
 #    By: alngo <alngo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/02 14:51:23 by alngo             #+#    #+#              #
-#    Updated: 2020/03/02 15:58:42 by alngo            ###   ########.fr        #
+#    Updated: 2020/03/02 16:05:37 by alngo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ def mean():
 def std():
     pass
 
-def percentile(percent):
+def quantile(amount):
     pass
 
 def minimum():
