@@ -12,59 +12,67 @@
 
 import argparse
 import pandas as pd
-from utils.csv import read_csv
+from .utils import read_csv
+
 
 def arguments():
     parser = argparse.ArgumentParser(
-            description="Describe dataset")
+        description="Describe dataset")
 
-    parser.add_argument("datapath", metavar="<datapath>", type=str, help="path to a valid dataset.")
+    parser.add_argument("datapath", metavar="<datapath>",
+                        type=str, help="path to a valid dataset.")
 
     args = parser.parse_args()
     return args
 
+
 def count():
     pass
+
 
 def mean():
     pass
 
+
 def std():
     pass
+
 
 def quantile(amount):
     pass
 
+
 def minimum():
     pass
 
+
 def maximum():
     pass
+
 
 def describe():
     args = arguments()
     df = read_csv(args.datapath)
     df.drop(["Index"], axis=1, inplace=True)
     description = pd.DataFrame(
-            columns=df.columns,
-            index=[
-                "Count",
-                "Mean",
-                "Std",
-                "Min",
-                "25%",
-                "50%",
-                "75%",
-                "Max"
-                ]
-            )
+        columns=df.columns,
+        index=[
+            "Count",
+            "Mean",
+            "Std",
+            "Min",
+            "25%",
+            "50%",
+            "75%",
+            "Max"
+        ]
+    )
 
     for desc, feature in description.iterrows():
         if desc is "Min":
             print("min")
         if desc is "Max":
             print("max")
-
 
     # for exemple purpose only
     print(description.head())
