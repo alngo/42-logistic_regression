@@ -31,7 +31,7 @@ def test_mean():
 
 
 def test_std():
-    df = pd.read_csv("../../resources/nba.csv")
+    df = pd.read_csv("./resources/nba.csv")
     result = std(df)
     assert result[0] == float('NaN')
     assert result[1] == float('NaN')

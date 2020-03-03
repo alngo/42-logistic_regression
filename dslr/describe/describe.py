@@ -45,11 +45,11 @@ def count(dataframe):
     return count
 
 
-def mean():
+def mean(dataframe):
     pass
 
 
-def std():
+def std(dataframe):
     pass
 
 
