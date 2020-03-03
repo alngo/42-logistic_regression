@@ -53,15 +53,15 @@ def std(dataframe):
     pass
 
 
-def quantile(amount):
+def quantile(dataframe, amount):
     pass
 
 
-def minimum():
+def minimum(dataframe):
     pass
 
 
-def maximum():
+def maximum(dataframe):
     pass
 
 
