@@ -17,7 +17,7 @@ import os
 sys.path.insert(0, os.path.abspath(
     os.path.join(os.path.dirname(__file__), '..')))
 
-from utils import *  # noqa # pylint: disable=wrong-import-position
+from utils import read_csv  # noqa # pylint: disable=wrong-import-position
 
 
 def arguments():
@@ -33,7 +33,7 @@ def arguments():
 
 def count(dataframe):
     """
-    Number of non-NA elements in a Series.
+    Compute number of non-NA elements in a dataframe.
     """
     count = []
     for column, values in dataframe.iteritems():
@@ -46,11 +46,30 @@ def count(dataframe):
 
 
 def mean(dataframe):
-    pass
+    """
+    Compute mean of column's element in a dataframe.
+    """
+    mean = []
+    for column, values in dataframe.iteritems():
+        length = len(values)
+        acc = 0
+        for key, value in values.iteritems():
+            acc += value
+        mean.append(acc / length)
+    return mean
 
 
 def std(dataframe):
-    pass
+    """
+    Compute std of columns's element in a dataframe.
+    """
+    std = []
+    for column, values in dataframe.iteritems():
+        acc = 0
+        for key, value in values.iteritems():
+            acc += 1
+        std.append(acc)
+    return std
 
 
 def quantile(dataframe, amount):
