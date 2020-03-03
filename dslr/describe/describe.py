@@ -10,9 +10,14 @@
 #                                                                              #
 # **************************************************************************** #
 
-import argparse
 import pandas as pd
-from tools import read_csv
+import argparse
+import sys
+import os
+sys.path.insert(0, os.path.abspath(
+    os.path.join(os.path.dirname(__file__), '..')))
+
+from utils import *  # noqa # pylint: disable=wrong-import-position
 
 
 def arguments():
@@ -26,8 +31,18 @@ def arguments():
     return args
 
 
-def count():
-    pass
+def count(dataframe):
+    """
+    Number of non-NA elements in a Series.
+    """
+    count = []
+    for column, values in dataframe.iteritems():
+        counter = 0
+        for key, value in values.iteritems():
+            if not pd.isna(value):
+                counter += 1
+        count.append(counter)
+    return count
 
 
 def mean():
@@ -68,11 +83,8 @@ def describe():
         ]
     )
 
-    for desc, feature in description.iterrows():
-        if desc is "Min":
-            print("min")
-        if desc is "Max":
-            print("max")
+    description.iloc[0] = count(df)
+    description.iloc[1] = mean(df)
 
     # for exemple purpose only
     print(description.head())
