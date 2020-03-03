@@ -14,7 +14,6 @@ def arguments():
 def program():
     args = arguments()
     datapath = os.path.abspath(args.datapath)
-    print(datapath)
     prog = Dslr(datapath)
 
     while True:

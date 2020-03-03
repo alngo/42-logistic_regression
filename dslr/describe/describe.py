@@ -12,7 +12,7 @@
 
 import argparse
 import pandas as pd
-from .utils import read_csv
+from tools import read_csv
 
 
 def arguments():
