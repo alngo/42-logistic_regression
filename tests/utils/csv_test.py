@@ -10,8 +10,8 @@
 #                                                                              #
 # **************************************************************************** #
 
-from .csv import read_csv
 import pytest
+from dslr.utils.csv import read_csv
 
 
 def test_get_parameters_with_none(capsys):
