@@ -4,7 +4,7 @@ DATAPATH := ./resources/dataset_train.csv
 BLUE=\033[0;34m
 NC=\033[0m # No Color
 
-.PHONY: run test clean
+.PHONY: run test clean pytest
 
 run:
 	@python -m dslr $(DATAPATH)

@@ -9,7 +9,7 @@ class Dslr:
 
     def run(self, action):
         if action == "describe":
-            os.system(f"python {describe_path} {self.datapath}")
+            os.system(f"python {describe_path} {self.datapath}") #nosec
         elif action == "histogram":
             raise NotImplementedError("Method is required!")
         elif action == "pair_plot":

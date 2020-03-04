@@ -6,7 +6,7 @@
 #    By: alngo <alngo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/04 10:49:53 by alngo             #+#    #+#              #
-#    Updated: 2020/03/04 11:02:45 by alngo            ###   ########.fr        #
+#    Updated: 2020/03/04 14:38:26 by alngo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,11 +23,11 @@ def compute_std(serie):
     acc = 0.0
     try:
         for _, value in clean_serie.iteritems():
-            acc += (value - mean) ** 2
+            acc += ((value - mean) ** 2)
     except TypeError:
         return (float('NaN'))
     finally:
-        variance = np.float((1 / length) * acc)
+        variance = (1 / length) * acc
         return (np.sqrt(variance))
 
 

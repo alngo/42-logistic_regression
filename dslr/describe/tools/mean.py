@@ -6,11 +6,9 @@
 #    By: alngo <alngo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/04 10:49:17 by alngo             #+#    #+#              #
-#    Updated: 2020/03/04 10:54:04 by alngo            ###   ########.fr        #
+#    Updated: 2020/03/04 14:29:27 by alngo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
-import numpy as np
 
 def compute_mean(serie):
     """
@@ -25,7 +23,7 @@ def compute_mean(serie):
     except TypeError:
         return (float('NaN'))
     finally:
-        return (np.float(acc / length))
+        return (acc / length)
 
 
 def mean(dataframe):

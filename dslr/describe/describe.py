@@ -6,7 +6,7 @@
 #    By: alngo <alngo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/02 14:51:23 by alngo             #+#    #+#              #
-#    Updated: 2020/03/04 11:22:24 by alngo            ###   ########.fr        #
+#    Updated: 2020/03/04 13:51:07 by alngo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,11 +39,27 @@ def arguments():
     args = parser.parse_args()
     return args
 
+def remove_undescribable_column(dataframe):
+    cols_to_remove = []
+
+    dataframe.drop(["Index"], axis=1, inplace=True)
+    for col in dataframe.columns:
+        try:
+            _ = dataframe[col].astype(float)
+        except ValueError:
+            cols_to_remove.append(col)
+            pass
+
+    clean_dataframe = dataframe[[
+        col for col in dataframe.columns if col not in cols_to_remove
+        ]]
+    return clean_dataframe
+
 
 def describe():
     args = arguments()
     df = read_csv(args.datapath)
-    df.drop(["Index"], axis=1, inplace=True)
+    df = remove_undescribable_column(df)
     description = pd.DataFrame(
         columns=df.columns,
         index=[
@@ -68,7 +84,7 @@ def describe():
     description.iloc[7] = maximum(df)
 
     # for exemple purpose only
-    print(description.head())
+    print(description)
     print(df.describe())
 
 

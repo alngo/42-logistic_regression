@@ -17,7 +17,7 @@ def program():
     prog = Dslr(datapath)
 
     while True:
-        action = input("What ?\n")
+        action = input("What ?\n") #nosec
         if action == "exit":
             print("Bye~ !")
             break
