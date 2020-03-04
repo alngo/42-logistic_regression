@@ -6,7 +6,7 @@
 #    By: alngo <alngo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/02 14:51:23 by alngo             #+#    #+#              #
-#    Updated: 2020/03/04 13:51:07 by alngo            ###   ########.fr        #
+#    Updated: 2020/03/04 14:46:49 by alngo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -83,10 +83,7 @@ def describe():
     description.iloc[6] = quantile(df, 0.75)
     description.iloc[7] = maximum(df)
 
-    # for exemple purpose only
     print(description)
-    print(df.describe())
-
 
 if __name__ == "__main__":
     describe()
