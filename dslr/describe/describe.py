@@ -6,19 +6,22 @@
 #    By: alngo <alngo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/02 14:51:23 by alngo             #+#    #+#              #
-#    Updated: 2020/03/02 16:05:37 by alngo            ###   ########.fr        #
+#    Updated: 2020/03/04 11:09:39 by alngo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 import pandas as pd
+import numpy as np
 import argparse
 import sys
 import os
 sys.path.insert(0, os.path.abspath(
     os.path.join(os.path.dirname(__file__), '..')))
+sys.path.insert(0, os.path.abspath(os.path.dirname(__file__)))
 
 from utils import read_csv  # noqa # pylint: disable=wrong-import-position
 
+from .tools import count, mean, std, quantile, minimum, maximum
 
 def arguments():
     parser = argparse.ArgumentParser(
@@ -29,59 +32,6 @@ def arguments():
 
     args = parser.parse_args()
     return args
-
-
-def count(dataframe):
-    """
-    Compute number of non-NA elements in a dataframe.
-    """
-    count = []
-    for column, values in dataframe.iteritems():
-        counter = 0
-        for key, value in values.iteritems():
-            if not pd.isna(value):
-                counter += 1
-        count.append(counter)
-    return count
-
-
-def mean(dataframe):
-    """
-    Compute mean of column's element in a dataframe.
-    """
-    mean = []
-    for column, values in dataframe.iteritems():
-        length = len(values)
-        acc = 0
-        for key, value in values.iteritems():
-            acc += value
-        mean.append(acc / length)
-    return mean
-
-
-def std(dataframe):
-    """
-    Compute std of columns's element in a dataframe.
-    """
-    std = []
-    for column, values in dataframe.iteritems():
-        acc = 0
-        for key, value in values.iteritems():
-            acc += 1
-        std.append(acc)
-    return std
-
-
-def quantile(dataframe, amount):
-    pass
-
-
-def minimum(dataframe):
-    pass
-
-
-def maximum(dataframe):
-    pass
 
 
 def describe():
@@ -104,10 +54,15 @@ def describe():
 
     description.iloc[0] = count(df)
     description.iloc[1] = mean(df)
+    description.iloc[2] = std(df)
+    description.iloc[3] = minimum(df)
+    description.iloc[4] = quantile(df)
+    description.iloc[5] = quantile(df)
+    description.iloc[6] = quantile(df)
+    description.iloc[7] = maximum(df)
 
     # for exemple purpose only
     print(description.head())
-    print(df.head())
     print(df.describe())
 
 

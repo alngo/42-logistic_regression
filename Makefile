@@ -6,8 +6,6 @@ NC=\033[0m # No Color
 
 .PHONY: run test clean
 
-
-
 run:
 	@python -m dslr $(DATAPATH)
 
