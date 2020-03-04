@@ -64,10 +64,10 @@ def test_maximum():
         "D": [14, 3, 17, 2, 6]
     })
     result = maximum(df)
-    assert result[0] == 1
-    assert result[1] == 2
-    assert result[2] == 3
-    assert result[3] == 2
+    assert result[0] == 44
+    assert result[1] == 54
+    assert result[2] == 20
+    assert result[3] == 17
 
 def test_quantile():
     df = pd.DataFrame({
