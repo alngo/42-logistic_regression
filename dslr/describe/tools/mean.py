@@ -10,6 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
+
 def compute_mean(serie):
     """
     Compute mean of a serie
@@ -30,7 +31,8 @@ def mean(dataframe):
     """
     Compute mean of column's element in a dataframe.
     """
-    mean = []
-    for _, serie in dataframe.iteritems():
-        mean.append(compute_mean(serie))
+    mean = [
+        compute_mean(serie)
+        for _, serie in dataframe.iteritems()
+    ]
     return mean

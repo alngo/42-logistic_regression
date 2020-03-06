@@ -12,6 +12,7 @@
 
 import pandas as pd
 
+
 def count(dataframe):
     """
     Compute number of non-NA elements in a dataframe.

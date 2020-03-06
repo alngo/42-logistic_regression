@@ -13,6 +13,7 @@
 import numpy as np
 from mean import compute_mean
 
+
 def compute_std(serie):
     """
     Compute std of a serie
@@ -31,12 +32,12 @@ def compute_std(serie):
         return (np.sqrt(variance))
 
 
-
 def std(dataframe):
     """
     Compute std of columns's element in a dataframe.
     """
-    std = []
-    for _, serie in dataframe.iteritems():
-        std.append(compute_std(serie))
+    std = [
+        compute_std(serie)
+        for _, serie in dataframe.iteritems()
+    ]
     return std

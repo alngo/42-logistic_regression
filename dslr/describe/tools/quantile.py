@@ -12,6 +12,7 @@
 
 import math
 
+
 def compute_quantile(serie, q):
     clean_serie = serie.dropna()
     sorted_serie = clean_serie.sort_values(ascending=True)
@@ -28,7 +29,8 @@ def compute_quantile(serie, q):
 def quantile(dataframe, q):
     """
     """
-    quantile = []
-    for _, serie in dataframe.iteritems():
-        quantile.append(compute_quantile(serie, q))
+    quantile = [
+        compute_quantile(serie, q)
+        for _, serie in dataframe.iteritems()
+    ]
     return quantile
