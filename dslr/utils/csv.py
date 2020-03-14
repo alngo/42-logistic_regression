@@ -21,7 +21,7 @@ def read_csv(path):
     except FileNotFoundError:
         print(f'File at path: "{path}" not found')
         sys.exit(1)
-    except:
+    except Exception:
         print(f'An unexpected error occured on read_csv')
         sys.exit(1)
     return parameters
@@ -30,6 +30,23 @@ def read_csv(path):
 def write_csv(data, output):
     df = pd.DataFrame(data=data, index=[0])
     df.to_csv(output, index=None)
+
+
+def clean_dataframe(dataframe):
+    cols_to_remove = []
+
+    dataframe.drop(["Index"], axis=1, inplace=True)
+    for col in dataframe.columns:
+        try:
+            _ = dataframe[col].astype(float)
+        except ValueError:
+            cols_to_remove.append(col)
+            pass
+
+    new_dataframe = dataframe[[
+        col for col in dataframe.columns if col not in cols_to_remove
+    ]]
+    return new_dataframe
 
 
 def check_csv(*fields):
@@ -45,7 +62,7 @@ def check_csv(*fields):
             except IndexError:
                 print(f"Can't process {func.__name__}: invalid csv")
                 sys.exit(1)
-            except:
+            except Exception:
                 print(f'An unexpected error occured on read_csv')
                 sys.exit(1)
             return func(self, *args, **kwargs)
