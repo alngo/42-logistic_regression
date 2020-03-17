@@ -19,8 +19,7 @@ sys.path.insert(0, os.path.abspath(
 sys.path.insert(0, os.path.abspath(
     os.path.join(os.path.dirname(__file__), 'tools')))
 
-from utils import read_csv  # noqa # pylint: disable=wrong-import-position
-from utils import clean_dataframe  # noqa # pylint: disable=wrong-import-position
+from utils import read_csv, drop_columns  # noqa # pylint: disable=wrong-import-position
 
 from count import count  # noqa # pylint: disable=wrong-import-position
 from mean import mean  # noqa # pylint: disable=wrong-import-position
@@ -44,7 +43,8 @@ def arguments():
 def describe():
     args = arguments()
     df = read_csv(args.datapath)
-    df = clean_dataframe(df)
+    df = drop_columns(df, ["Index", "Hogwarts House", "First Name",
+                           "Last Name", "Birthday", "Best Hand"])
     description = pd.DataFrame(
         columns=df.columns,
         index=[
