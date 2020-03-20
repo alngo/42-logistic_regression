@@ -1,8 +1,9 @@
-import argparse
-import chart_studio.plotly as plt
-import cufflinks as cf
-import sys
 import os
+import sys
+import argparse
+import plotly
+import cufflinks as cf
+cf.go_offline()
 sys.path.insert(0, os.path.abspath(
     os.path.join(os.path.dirname(__file__), '..')))
 sys.path.insert(0, os.path.abspath(
@@ -38,8 +39,9 @@ def histogram():
     df = drop_columns(df, ["Index", "Hogwarts House", "First Name",
                            "Last Name", "Birthday", "Best Hand"])
 
-    test = df.iplot(kind='histogram', filename='cufflinks/basic-histogram')
-    plt.offline.plot(test)
+    fig = df.iplot(kind='histogram', asFigure=True)
+    plotly.offline.plot(fig)
+
     # index = 1
     # for column in df:
     #     G_marks = normalize(df[column][G_mask])
