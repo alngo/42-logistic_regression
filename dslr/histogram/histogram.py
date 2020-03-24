@@ -1,5 +1,6 @@
 import os
 import sys
+import pandas as pd
 import argparse
 import plotly
 import cufflinks as cf
@@ -35,32 +36,32 @@ def generate_hogwarts_house_mask(df=None):
 def histogram():
     args = arguments()
     df = read_csv(args.datapath)
-    G_mask, S_mask, H_mask, R_mask = generate_hogwarts_house_mask(df=df)
+    G_mask, S_mask, H_mask, R_mask = generate_hogwarts_house_mask(df)
     df = drop_columns(df, ["Index", "Hogwarts House", "First Name",
                            "Last Name", "Birthday", "Best Hand"])
 
-    fig = df.iplot(kind='histogram', asFigure=True)
-    plotly.offline.plot(fig)
+    for column in df:
+        G_marks = df[column][G_mask]
+        S_marks = df[column][S_mask]
+        H_marks = df[column][H_mask]
+        R_marks = df[column][R_mask]
 
-    # index = 1
-    # for column in df:
-    #     G_marks = normalize(df[column][G_mask])
-    #     S_marks = normalize(df[column][S_mask])
-    #     H_marks = normalize(df[column][H_mask])
-    #     R_marks = normalize(df[column][R_mask])
+        subfig = plotly.graph_objs.Figure(
+        )
 
-    #     try:
-    #         plt.hist(G_marks)
-    #         plt.hist(S_marks)
-    #         plt.hist(H_marks)
-    #         plt.hist(R_marks)
-    #     except Exception:
-    #         pass
+        subfig.add_trace(plotly.graph_objs.Histogram(
+            x=G_marks, name="Gryffindor", marker=dict(color="#ff0000")))
+        subfig.add_trace(plotly.graph_objs.Histogram(
+            x=S_marks, name="Slytherin", marker=dict(color="#008000")))
+        subfig.add_trace(plotly.graph_objs.Histogram(
+            x=H_marks, name="Hufflepuff", marker=dict(color="#ffff00")))
+        subfig.add_trace(plotly.graph_objs.Histogram(
+            x=R_marks, name="Ravenclaw", marker=dict(color="#0000ff")))
 
-    #     plt.title(column)
-    #     index = index + 1
-
-    # plt.show()
+        title = f"Histogram {column}"
+        subfig.update_layout(title_text=title, barmode="overlay")
+        subfig.update_traces(opacity=0.50)
+        subfig.show()
 
 
 if __name__ == "__main__":
