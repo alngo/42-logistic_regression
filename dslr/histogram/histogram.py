@@ -9,7 +9,7 @@ sys.path.insert(0, os.path.abspath(
 sys.path.insert(0, os.path.abspath(
     os.path.join(os.path.dirname(__file__), 'tools')))
 
-from utils import read_csv, drop_columns, normalize  # noqa # pylint: disable=wrong-import-position
+from utils import read_csv, drop_columns, normalize, generate_hogwarts_house_mask  # noqa # pylint: disable=wrong-import-position
 
 
 def arguments():
@@ -25,15 +25,6 @@ def arguments():
 
     args = parser.parse_args()
     return args
-
-
-def generate_hogwarts_house_mask(df=None):
-    isGryffindor = df["Hogwarts House"] == "Gryffindor"
-    isSlytherin = df["Hogwarts House"] == "Slytherin"
-    isRavenclaw = df["Hogwarts House"] == "Ravenclaw"
-    isHufflepuff = df["Hogwarts House"] == "Hufflepuff"
-
-    return [isGryffindor, isSlytherin, isHufflepuff, isRavenclaw]
 
 
 def plotly_histogram(G_mask, S_mask, H_mask, R_mask, df):
