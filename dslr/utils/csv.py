@@ -21,7 +21,7 @@ def read_csv(path):
     except FileNotFoundError:
         print(f'File at path: "{path}" not found')
         sys.exit(1)
-    except:
+    except Exception:
         print(f'An unexpected error occured on read_csv')
         sys.exit(1)
     return parameters
@@ -34,9 +34,9 @@ def write_csv(data, output):
 
 def check_csv(*fields):
     def wrapper(func):
-        def new_f(self, *args, **kwargs):
+        def new_f(*args, **kwargs):
             try:
-                columns = self.data.columns.tolist()
+                columns = args[0].columns.tolist()
                 if (len(columns) != len(fields)):
                     raise IndexError
                 for (a, b) in zip(columns, fields):
@@ -45,10 +45,20 @@ def check_csv(*fields):
             except IndexError:
                 print(f"Can't process {func.__name__}: invalid csv")
                 sys.exit(1)
-            except:
-                print(f'An unexpected error occured on read_csv')
+            except Exception as err:
+                print(f'An unexpected error occured on read_csv: {err}')
                 sys.exit(1)
-            return func(self, *args, **kwargs)
+            return func(*args, **kwargs)
         new_f.__name__ = func.__name__
         return new_f
     return wrapper
+
+
+@check_csv("Index", "Hogwarts House", "First Name", "Last Name", "Birthday",
+           "Best Hand", "Arithmancy", "Astronomy", "Herbology",
+           "Defense Against the Dark Arts", "Divination", "Muggle Studies",
+           "Ancient Runes", "History of Magic", "Transfiguration", "Potions",
+           "Care of Magical Creatures", "Charms", "Flying")
+def drop_columns(df=None, columns=[]):
+    df.drop(columns, axis=1, inplace=True)
+    return df

@@ -11,7 +11,6 @@
 # **************************************************************************** #
 
 import pandas as pd
-import numpy as np
 import argparse
 import sys
 import os
@@ -20,14 +19,15 @@ sys.path.insert(0, os.path.abspath(
 sys.path.insert(0, os.path.abspath(
     os.path.join(os.path.dirname(__file__), 'tools')))
 
-from utils import read_csv  # noqa # pylint: disable=wrong-import-position
+from utils import read_csv, drop_columns  # noqa # pylint: disable=wrong-import-position
 
-from count import count
-from mean import mean
-from std import std
-from quantile import quantile
-from minimum import minimum
-from maximum import maximum
+from count import count  # noqa # pylint: disable=wrong-import-position
+from mean import mean  # noqa # pylint: disable=wrong-import-position
+from std import std  # noqa # pylint: disable=wrong-import-position
+from quantile import quantile  # noqa # pylint: disable=wrong-import-position
+from minimum import minimum  # noqa # pylint: disable=wrong-import-position
+from maximum import maximum  # noqa # pylint: disable=wrong-import-position
+
 
 def arguments():
     parser = argparse.ArgumentParser(
@@ -39,27 +39,12 @@ def arguments():
     args = parser.parse_args()
     return args
 
-def remove_undescribable_column(dataframe):
-    cols_to_remove = []
-
-    dataframe.drop(["Index"], axis=1, inplace=True)
-    for col in dataframe.columns:
-        try:
-            _ = dataframe[col].astype(float)
-        except ValueError:
-            cols_to_remove.append(col)
-            pass
-
-    clean_dataframe = dataframe[[
-        col for col in dataframe.columns if col not in cols_to_remove
-        ]]
-    return clean_dataframe
-
 
 def describe():
     args = arguments()
     df = read_csv(args.datapath)
-    df = remove_undescribable_column(df)
+    df = drop_columns(df, ["Index", "Hogwarts House", "First Name",
+                           "Last Name", "Birthday", "Best Hand"])
     description = pd.DataFrame(
         columns=df.columns,
         index=[
@@ -84,6 +69,7 @@ def describe():
     description.iloc[7] = maximum(df)
 
     print(description)
+
 
 if __name__ == "__main__":
     describe()
