@@ -14,9 +14,9 @@ class Dslr:
             os.system(f"python {describe_path} {self.datapath}")  # nosec
         elif action == "histogram":
             os.system(f"jupyter notebook {histogram_path}")  # nosec
-        elif action == "pair_plot":
-            os.system(f"jupyter notebook {scatter_plot_path}")  # nosec
         elif action == "scatter_plot":
+            os.system(f"jupyter notebook {scatter_plot_path}")  # nosec
+        elif action == "pair_plot":
             raise NotImplementedError("Method is required!")
         elif action == "loreg_train":
             raise NotImplementedError("Method is required!")
