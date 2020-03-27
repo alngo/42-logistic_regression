@@ -3,6 +3,7 @@ path = os.path.dirname(__file__)
 describe_path = os.path.join(path, "describe/describe.py")
 histogram_path = os.path.join(path, "histogram/")
 scatter_plot_path = os.path.join(path, "scatter_plot/")
+pair_plot_path = os.path.join(path, "pair_plot/")
 
 
 class Dslr:
@@ -17,7 +18,7 @@ class Dslr:
         elif action == "scatter_plot":
             os.system(f"jupyter notebook {scatter_plot_path}")  # nosec
         elif action == "pair_plot":
-            raise NotImplementedError("Method is required!")
+            os.system(f"jupyter notebook {pair_plot_path}")  # nosec
         elif action == "loreg_train":
             raise NotImplementedError("Method is required!")
         elif action == "loreg_predict":
